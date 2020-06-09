@@ -2,6 +2,8 @@
 
 Let users accept/reject cookies and display `site/snippets/cookies_accepted.php` conditionally.
 
+Simply insert `<?php snippet('kookie') ?>` and you're good to go.
+
 ## Options
 
 ```php
