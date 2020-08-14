@@ -1,16 +1,16 @@
 <?php
 	if(isset($_POST['cookies_accept'])) {
-		Cookie::set("cookies_switch", "true");
+		setcookie("kookie", 'true', time() + 3600);
 	}
 	elseif(isset($_POST['cookies_reject'])) {
-		Cookie::set("cookies_switch", "false");
+		setcookie("kookie", 'false', time() + 3600);
 	}
 ?>
 
-<?php if (!Cookie::exists("cookies_switch")): ?>
+<?php if (!isset($_COOKIE['kookie'])): ?>
 
 	<div class="kookie">
-		<form action="<?= $page->url() ?>" method="POST">
+		<form id="kookie_form" action="<?= $page->url() ?>" method="POST">
 			<div class="kookie_text">
 				<?= option('medienbaecker.kookie.text') ?>
 				<a href="<?= option('medienbaecker.kookie.link') ?>"><?= option('medienbaecker.kookie.linkText') ?></a>
@@ -21,6 +21,35 @@
 			</div>
 		</form>
 	</div>
+
+	<script type="text/javascript">
+		var buttons = document.querySelectorAll('.kookie_buttons button');
+		buttons.forEach(function(button) {
+			button.addEventListener("click", function(e) {
+				if(button.getAttribute('name') == 'cookies_accept') {
+					fetch('<?= $site->url() ?>/kookie/cookies_accepted').then(function (response) {
+						return response.text();
+					}).then(function (html) {
+						var scripts = document.createElement('div');
+						scripts.innerHTML = html;
+						scripts.querySelectorAll('script').forEach(function(script) {
+							var newScript = document.createElement("script");
+							newScript.setAttribute("type", "text/javascript");
+							newScript.text = script.innerHTML;
+							document.body.appendChild(newScript);
+						});
+					});
+					document.cookie = "kookie=true";
+					document.querySelector('.kookie').remove();
+				}
+				else {
+					document.cookie = "kookie=false";
+					document.querySelector('.kookie').remove();
+				}
+				e.preventDefault();
+			});
+		})
+	</script>
 
 	<style>
 		.kookie {
@@ -75,8 +104,6 @@
 				}
 	</style>
 
-<?php elseif (Cookie::get("cookies_switch") AND Cookie::get("cookies_switch") == "true"): ?>
-
+<?php elseif (isset($_COOKIE['kookie']) AND $_COOKIE['kookie'] == "true"): ?>
 	<?php snippet('cookies_accepted') ?>
-	
 <?php endif ?>

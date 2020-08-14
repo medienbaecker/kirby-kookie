@@ -19,4 +19,14 @@ Kirby::plugin('medienbaecker/kookie', [
 	'snippets' => [
 		'kookie' => __DIR__ . '/snippets/kookie.php'
 	],
+	'routes' => function ($kirby) {
+		return [
+		[
+			'pattern' => 'kookie/cookies_accepted',
+			'action' => function () {
+				return snippet('cookies_accepted', [], true);
+			}
+		]
+		];
+	}
 ]);
