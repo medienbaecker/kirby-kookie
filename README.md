@@ -1,6 +1,6 @@
 # Kirby Kookie (WIP)
 
-Let users accept/reject cookies and display `site/snippets/cookies_accepted.php` conditionally.
+Let users accept/reject cookies and display the `<script>` tags in `site/snippets/cookies_accepted.php` conditionally.
 
 Simply insert `<?php snippet('kookie') ?>` and you're good to go.
 
