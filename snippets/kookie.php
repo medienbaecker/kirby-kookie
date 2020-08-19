@@ -70,6 +70,7 @@
 			width: 100%;
 			box-sizing: border-box;
 			max-width: 500px;
+			background-color: var(--kookie-background-color);
 		}
 			.kookie_text {
 
