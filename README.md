@@ -4,6 +4,9 @@ Let users accept/reject cookies and display the `<script>` tags in `site/snippet
 
 Simply insert `<?php snippet('kookie') ?>` and you're good to go.
 
+![Preview](https://user-images.githubusercontent.com/7975568/91409020-17ecbe00-e845-11ea-8d3f-3c16a56b90cc.gif)
+
+
 ## Options
 
 ```php
