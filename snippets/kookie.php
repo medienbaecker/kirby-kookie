@@ -1,9 +1,9 @@
 <?php
 	if(isset($_POST['cookies_accept'])) {
-		setcookie("kookie", 'true', time() + 3600);
+		setcookie("kookie", 'true', time() + (86400 * 30));
 	}
 	elseif(isset($_POST['cookies_reject'])) {
-		setcookie("kookie", 'false', time() + 3600);
+		setcookie("kookie", 'false', time() + (86400 * 7));
 	}
 ?>
 
